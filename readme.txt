@@ -1,10 +1,10 @@
 === Helion Widget ===
 Contributors: paulpela
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=63SBY4W2R42NW
-Tags: helion, program partnerski
+Tags: helion, program partnerski,widget
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.92
+Stable tag: 0.93
 
 Helion Widget jest przeznaczony dla osób chcących promować na swoim blogu książki z księgarni Helion, Sensus, Onepress i Septem.
 
@@ -53,6 +53,9 @@ Widget jest gotowy do wyświetlania. Przy każdym odświeżeniu strony zostanie 
 screenshot-1.png
 
 == Changelog ==
+
+= 0.93 =
+* Poprawiono błędy w pliku readme.txt
 
 = 0.92 =
 * Poprawiono błędy w pliku readme.txt
