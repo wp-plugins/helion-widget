@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: helion, program partnerski,widget
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.94
+Stable tag: 0.95
 
 Helion Widget jest przeznaczony dla osób chcących promować na swoim blogu książki z księgarni Helion, Sensus, Onepress i Septem.
 
@@ -30,12 +30,6 @@ Instalacja odbywa się przez panel administracyjny w trzech prostych krokach:
 
 Możesz też wgrać wtyczkę przez FTP do katalogu `/wp-content/plugins/`, a następnie aktywować ją w panelu administracyjnym w menu Wtyczki.
 
-== Frequently Asked Questions ==
-
-= Jak dołączyć do programu partnerskiego Helion? =
-
-Należy zarejestrować się na stronie http://program-partnerski.helion.pl/
-
 = Jak skonfigurować Helion Widget? =
 
 Konfiguracja wtyczki jest dwustopniowa.
@@ -48,11 +42,20 @@ W menu Ustawienia->Helion Widget znajdują się pola, w które należy wpisać i
 
 Widget jest gotowy do wyświetlania. Przy każdym odświeżeniu strony zostanie wylosowana książka, a jej okładka pojawi się na pasku bocznym w wybranym miejscu.
 
+== Frequently Asked Questions ==
+
+= Jak dołączyć do programu partnerskiego Helion? =
+
+Należy zarejestrować się na stronie http://program-partnerski.helion.pl/
+
 == Screenshots ==
 
 screenshot-1.png
 
 == Changelog ==
+
+= 0.95 =
+* Informacja o braku listy książek do wyświetlenia
 
 = 0.94 =
 * Problem z poprawnym wyświetlaniem wersji
@@ -65,3 +68,9 @@ screenshot-1.png
 
 = 0.91 =
 * Pierwsza wersja publiczna.
+
+== Upgrade Notice ==
+
+= 0.95 =
+Dodano informację o braku listy książek do wyświetlenia. W poprzednich wersjach powodowało to powstanie błędu.
+

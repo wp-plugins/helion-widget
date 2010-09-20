@@ -4,7 +4,7 @@
 	Plugin URI: http://www.blogworkorange.net/helion-widget/
 	Description: Widget promujący wybrane książki z księgarni Helion, zintegrowany z programem partnerskim
 	Author: Paweł Pela
-	Version: 0.94
+	Version: 0.95
 	Author URI: http://www.paulpela.com
 	License: GPL2
 
@@ -58,77 +58,87 @@ class Helion_Widget extends WP_Widget {
 		$idents_os = get_option("onepress_ksiazki");
 		$idents_sm = get_option("septem_ksiazki");
 		
-		$idents_helion = explode(",", $idents_hn);
-		$idents_sensus = explode(",", $idents_ss);
-		$idents_onepress = explode(",", $idents_os);
-		$idents_septem = explode(",", $idents_sm);
-		$uczestnik = $instance['uczestnik'];
-		$okladka = $instance['okladka'];
+		if($idents_hn || $idents_ss || $idents_os || $idents_sm) {
 		
-		if($idents_hn) {
-			foreach($idents_helion as $id) {
-				$id_arr[] = array("helion", $id);
-			}
-		}
-		if($idents_ss) {
-			foreach($idents_sensus as $id) {
-				$id_arr[] = array("sensus", $id);
-			}
-		}
-		
-		if($idents_os) {
-			foreach($idents_onepress as $id) {
-				$id_arr[] = array("onepress", $id);
-			}
-		}
-		
-		if($idents_sm) {
-			foreach($idents_septem as $id) {
-				$id_arr[] = array("septem", $id);
-			}
-		}
-		
-		$rand = array_rand($id_arr);
-		$ident = $id_arr[$rand];
-		
-		
-		$description = simplexml_load_file("http://" . $ident[0] . ".pl/plugins/new/xml/ksiazka.cgi?ident=" . $ident[1]);
-		
-		$opis_big = $description->opis;
-		$tmp = strstr($opis_big, "<p>");
-		$opis_p = strip_tags(strstr($tmp, "</p>"));
-
-		foreach($description->tytul as $t) {
-			if($t->attributes()->language == "polski") {
-				$k_tytul = $t;
-			}
-		}
-		
-		$nowosc = $description->nowosc;
-		$bestseller = $description->bestseller;
-		
-		$nowosc_bestseller = "";
-		if($nowosc == 1 || $bestseller == 1) {
-			$nowosc_bestseller .= "<p>";
-			if($nowosc == 1)
-				$nowosc_bestseller .= "<img src=\"http://helion.pl/img/nowosc.gif\" alt=\"Nowość\" /> ";
-			if($bestseller == 1)
-				$nowosc_bestseller .= "<img src=\"http://helion.pl/img/bestseller.gif\" alt=\"Bestseller\" />";
-			$nowosc_bestseller .= "</p>";
-		}
-
-		echo $before_widget;
-		
-		if( $title )
-			echo $before_title . $title . $after_title;
+			$idents_helion = explode(",", $idents_hn);
+			$idents_sensus = explode(",", $idents_ss);
+			$idents_onepress = explode(",", $idents_os);
+			$idents_septem = explode(",", $idents_sm);
+			$uczestnik = $instance['uczestnik'];
+			$okladka = $instance['okladka'];
 			
-		?>
-		<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>"><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
-		<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>"><?php echo $k_tytul; ?></a></p>
-		<p>Cena: <?php echo $description->cena; ?>zł</p>
-		<?php 
-		echo $nowosc_bestseller;
-		echo $after_widget;
+			if($idents_hn) {
+				foreach($idents_helion as $id) {
+					$id_arr[] = array("helion", $id);
+				}
+			}
+			if($idents_ss) {
+				foreach($idents_sensus as $id) {
+					$id_arr[] = array("sensus", $id);
+				}
+			}
+			
+			if($idents_os) {
+				foreach($idents_onepress as $id) {
+					$id_arr[] = array("onepress", $id);
+				}
+			}
+			
+			if($idents_sm) {
+				foreach($idents_septem as $id) {
+					$id_arr[] = array("septem", $id);
+				}
+			}
+			
+			$rand = array_rand($id_arr);
+			$ident = $id_arr[$rand];
+			
+			
+			$description = simplexml_load_file("http://" . $ident[0] . ".pl/plugins/new/xml/ksiazka.cgi?ident=" . $ident[1]);
+			
+			$opis_big = $description->opis;
+			$tmp = strstr($opis_big, "<p>");
+			$opis_p = strip_tags(strstr($tmp, "</p>"));
+
+			foreach($description->tytul as $t) {
+				if($t->attributes()->language == "polski") {
+					$k_tytul = $t;
+				}
+			}
+			
+			$nowosc = $description->nowosc;
+			$bestseller = $description->bestseller;
+			
+			$nowosc_bestseller = "";
+			if($nowosc == 1 || $bestseller == 1) {
+				$nowosc_bestseller .= "<p>";
+				if($nowosc == 1)
+					$nowosc_bestseller .= "<img src=\"http://helion.pl/img/nowosc.gif\" alt=\"Nowość\" /> ";
+				if($bestseller == 1)
+					$nowosc_bestseller .= "<img src=\"http://helion.pl/img/bestseller.gif\" alt=\"Bestseller\" />";
+				$nowosc_bestseller .= "</p>";
+			}
+
+			echo $before_widget;
+			
+			if( $title )
+				echo $before_title . $title . $after_title;
+				
+			?>
+			<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>"><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
+			<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>"><?php echo $k_tytul; ?></a></p>
+			<p>Cena: <?php echo $description->cena; ?>zł</p>
+			<?php 
+			echo $nowosc_bestseller;
+			echo $after_widget;
+		} else {
+			echo $before_widget;
+			if( $title )
+				echo $before_title . $title . $after_title;
+			echo '<p>Nie dodano jeszcze żadnych książek.</p>';
+			echo '<p>Dodaj identyfikatory książek w <code>Ustawienia->Helion Widget</code>.</p>';
+			echo $after_widget;
+		}
 	}
 	
 	function update( $new_instance, $old_instance ) {
