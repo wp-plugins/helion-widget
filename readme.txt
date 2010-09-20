@@ -4,55 +4,58 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: helion, program partnerski
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.91
+Stable tag: 0.92
 
-Helion Widget jest przeznaczony dla osób chc¹cych promowaæ na swoim blogu ksi¹¿ki z ksiêgarni Helion, Sensus, Onepress i Septem.
+Helion Widget jest przeznaczony dla osÃ³b chcÄ…cych promowaÄ‡ na swoim blogu ksiÄ…Å¼ki z ksiÄ™garni Helion, Sensus, Onepress i Septem.
 
 == Description ==
 
-Helion Widget wyœwietla na pasku bocznym ok³adkê po³¹czon¹ z linkiem zawieraj¹cym kod referencyjny do losowo wybranej ksi¹¿ki z dostarczonej przez ciebie listy.
+Helion Widget wyÅ›wietla na pasku bocznym okÅ‚adkÄ™ poÅ‚Ä…czonÄ… z linkiem zawierajÄ…cym kod referencyjny do losowo wybranej ksiÄ…Å¼ki z dostarczonej przez ciebie listy.
 
-Nie musisz wpisywaæ ani aktualizowaæ czêsto zmieniaj¹cych siê danych o ksi¹¿kach na bie¿¹co. Wystarczy, ¿e wska¿esz które ksi¹¿ki chcesz promowaæ. Widget pobierze pozosta³e dane i ok³adkê automatycznie.
+Nie musisz wpisywaÄ‡ ani aktualizowaÄ‡ czÄ™sto zmieniajÄ…cych siÄ™ danych o ksiÄ…Å¼kach na bieÅ¼Ä…co. Wystarczy, Å¼e wskaÅ¼esz ktÃ³re ksiÄ…Å¼ki chcesz promowaÄ‡. Widget pobierze pozostaÅ‚e dane i okÅ‚adkÄ™ automatycznie.
 
-Sam(a) wybierasz rozmiar ok³adki. Dodatkowo, po najechaniu myszk¹ nad ok³adkê wyœwietla siê opis ksi¹¿ki.
+Sam(a) wybierasz rozmiar okÅ‚adki. Dodatkowo, po najechaniu myszkÄ… nad okÅ‚adkÄ™ wyÅ›wietla siÄ™ opis ksiÄ…Å¼ki.
 
-Pod ok³adk¹ wyœwietlany jest tytu³ oraz cena. Jeœli ksi¹¿ka jest bestsellerem lub nowoœci¹, informacja o tym pojawia siê tak¿e pod ok³adk¹ ksi¹¿ki.
+Pod okÅ‚adkÄ… wyÅ›wietlany jest tytuÅ‚ oraz cena. JeÅ›li ksiÄ…Å¼ka jest bestsellerem lub nowoÅ›ciÄ…, informacja o tym pojawia siÄ™ takÅ¼e pod okÅ‚adkÄ… ksiÄ…Å¼ki.
 
-Czytelnik po klikniêciu na tytu³ lub ok³adkê zostanie przeniesiony na stronê odpowiedniej ksiêgarni i jeœli w ci¹gu 30 dni dokona dowolnego zakupu, zostanie ci naliczona procentowa prowizja od sprzeda¿y.
+Czytelnik po klikniÄ™ciu na tytuÅ‚ lub okÅ‚adkÄ™ zostanie przeniesiony na stronÄ™ odpowiedniej ksiÄ™garni i jeÅ›li w ciÄ…gu 30 dni dokona dowolnego zakupu, zostanie ci naliczona procentowa prowizja od sprzedaÅ¼y.
 
 == Installation ==
 
-Instalacja odbywa siê przez panel administracyjny w trzech prostych krokach:
+Instalacja odbywa siÄ™ przez panel administracyjny w trzech prostych krokach:
 
-   1. Pobierz pakiet z najnowsz¹ wersj¹ Helion Widget
-   2. WejdŸ do menu Wtyczki->Dodaj now¹
-   3. Wgraj pakiet instalacyjny na swój serwer i aktywuj wtyczkê
+   1. Pobierz pakiet z najnowszÄ… wersjÄ… Helion Widget
+   2. WejdÅº do menu Wtyczki->Dodaj nowÄ…
+   3. Wgraj pakiet instalacyjny na swÃ³j serwer i aktywuj wtyczkÄ™
 
-Mo¿esz te¿ wgraæ wtyczkê przez FTP do katalogu `/wp-content/plugins/`, a nastêpnie aktywowaæ j¹ w panelu administracyjnym w menu Wtyczki.
+MoÅ¼esz teÅ¼ wgraÄ‡ wtyczkÄ™ przez FTP do katalogu `/wp-content/plugins/`, a nastÄ™pnie aktywowaÄ‡ jÄ… w panelu administracyjnym w menu Wtyczki.
 
 == Frequently Asked Questions ==
 
-= Jak do³¹czyæ do programu partnerskiego Helion? =
+= Jak doÅ‚Ä…czyÄ‡ do programu partnerskiego Helion? =
 
-Nale¿y zarejestrowaæ siê na stronie http://program-partnerski.helion.pl/
+NaleÅ¼y zarejestrowaÄ‡ siÄ™ na stronie http://program-partnerski.helion.pl/
 
-= Jak skonfigurowaæ Helion Widget? =
+= Jak skonfigurowaÄ‡ Helion Widget? =
 
 Konfiguracja wtyczki jest dwustopniowa.
 
-Pierwszym krokiem jest umiejscowienie widgetu w wybranym miejscu i wpisanie numeru uczestnika PP Helion. Odbywa siê to w panelu administracyjnym za poœrednictwem menu Wygl¹d->Widgety.
+Pierwszym krokiem jest umiejscowienie widgetu w wybranym miejscu i wpisanie numeru uczestnika PP Helion. Odbywa siÄ™ to w panelu administracyjnym za poÅ›rednictwem menu WyglÄ…d->Widgety.
 
-Nastêpnie, nale¿y stworzyæ listê ksi¹¿ek, które maj¹ byæ wyœwietlane.
+NastÄ™pnie, naleÅ¼y stworzyÄ‡ listÄ™ ksiÄ…Å¼ek, ktÃ³re majÄ… byÄ‡ wyÅ›wietlane.
 
-W menu Ustawienia->Helion Widget znajduj¹ siê pola, w które nale¿y wpisaæ identyfikatory ksi¹¿ek do wyœwietlenia. Jeœli ksi¹¿ek jest wiêcej, nale¿y oddzieliæ identyfikatory przecinkiem bez spacji.
+W menu Ustawienia->Helion Widget znajdujÄ… siÄ™ pola, w ktÃ³re naleÅ¼y wpisaÄ‡ identyfikatory ksiÄ…Å¼ek do wyÅ›wietlenia. JeÅ›li ksiÄ…Å¼ek jest wiÄ™cej, naleÅ¼y oddzieliÄ‡ identyfikatory przecinkiem bez spacji.
 
-Widget jest gotowy do wyœwietlania. Przy ka¿dym odœwie¿eniu strony zostanie wylosowana ksi¹¿ka, a jej ok³adka pojawi siê na pasku bocznym w wybranym miejscu.
+Widget jest gotowy do wyÅ›wietlania. Przy kaÅ¼dym odÅ›wieÅ¼eniu strony zostanie wylosowana ksiÄ…Å¼ka, a jej okÅ‚adka pojawi siÄ™ na pasku bocznym w wybranym miejscu.
 
 == Screenshots ==
 
 screenshot-1.png
 
 == Changelog ==
+
+= 0.92 =
+* Poprawiono bÅ‚Ä™dy w pliku readme.txt
 
 = 0.91 =
 * Pierwsza wersja publiczna.
