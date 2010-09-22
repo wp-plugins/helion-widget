@@ -4,7 +4,7 @@
 	Plugin URI: http://www.blogworkorange.net/helion-widget/
 	Description: Widget promujący wybrane książki z księgarni Helion, zintegrowany z programem partnerskim
 	Author: Paweł Pela
-	Version: 0.95
+	Version: 0.96
 	Author URI: http://www.paulpela.com
 	License: GPL2
 
@@ -35,6 +35,14 @@ function helion_load_widget() {
 	register_widget( 'Helion_Widget' );
 }
 
+function _is_addon_installed($addon) {
+	if(in_array($addon, get_loaded_extensions())) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 class Helion_Widget extends WP_Widget {
 	
 	function Helion_Widget() {
@@ -50,6 +58,8 @@ class Helion_Widget extends WP_Widget {
 	
 	function widget( $args, $instance ) {
 		extract( $args );
+		
+		//define("HW_DEBUG", true);
 
 		$title = apply_filters('widget_title', $instance['title'] );
 		//$idents = $instance['ident'];
@@ -93,48 +103,80 @@ class Helion_Widget extends WP_Widget {
 			$rand = array_rand($id_arr);
 			$ident = $id_arr[$rand];
 			
-			
-			$description = simplexml_load_file("http://" . $ident[0] . ".pl/plugins/new/xml/ksiazka.cgi?ident=" . $ident[1]);
-			
-			$opis_big = $description->opis;
-			$tmp = strstr($opis_big, "<p>");
-			$opis_p = strip_tags(strstr($tmp, "</p>"));
+			if(ini_get("allow_url_fopen") && _is_addon_installed("SimpleXML")) {
+				$description = simplexml_load_file("http://" . $ident[0] . 
+							".pl/plugins/new/xml/ksiazka.cgi?ident=" . $ident[1]);
+				$noerrors_xml = true;
+				$debug = "simple od razu";
+			} else if(ini_set("allow_url_fopen", "On") && _is_addon_installed("SimpleXML")) {
+				$description = simplexml_load_file("http://" . $ident[0] . 
+							".pl/plugins/new/xml/ksiazka.cgi?ident=" . $ident[1]);
+				$noerrors_xml = true;
+				$debug = "simple od włączyłem";
+			} else if(_is_addon_installed("curl")) {
+				$cu = curl_init();
+				$curl_post = array("ident" => $ident[1]);
+				$curl_url = "http://" . $ident[0] . ".pl/plugins/new/xml/ksiazka.cgi";
+				curl_setopt($cu, CURLOPT_URL, $curl_url); 
+				curl_setopt($cu, CURLOPT_RETURNTRANSFER, 1); 
+				curl_setopt($cu, CURLOPT_POST, 1); 
+				curl_setopt($cu, CURLOPT_POSTFIELDS, $curl_post); 
+				$description = simplexml_load_string(curl_exec($cu));
+				curl_close($cu);
+				$noerrors_xml = true;
+				$debug = "curl";
+			} else {
+				$noerrors_xml = false;
+			}
+		
+			if($noerrors_xml) {
+				$opis_big = $description->opis;
+				$tmp = strstr($opis_big, "<p>");
+				$opis_p = strip_tags(strstr($tmp, "</p>"));
 
-			foreach($description->tytul as $t) {
-				if($t->attributes()->language == "polski") {
-					$k_tytul = $t;
+				foreach($description->tytul as $t) {
+					if($t->attributes()->language == "polski") {
+						$k_tytul = $t;
+					}
 				}
-			}
-			
-			$nowosc = $description->nowosc;
-			$bestseller = $description->bestseller;
-			
-			$nowosc_bestseller = "";
-			if($nowosc == 1 || $bestseller == 1) {
-				$nowosc_bestseller .= "<p>";
-				if($nowosc == 1)
-					$nowosc_bestseller .= "<img src=\"http://helion.pl/img/nowosc.gif\" alt=\"Nowość\" /> ";
-				if($bestseller == 1)
-					$nowosc_bestseller .= "<img src=\"http://helion.pl/img/bestseller.gif\" alt=\"Bestseller\" />";
-				$nowosc_bestseller .= "</p>";
-			}
-
-			echo $before_widget;
-			
-			if( $title )
-				echo $before_title . $title . $after_title;
 				
-			?>
-			<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>"><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
-			<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>"><?php echo $k_tytul; ?></a></p>
-			<p>Cena: <?php echo $description->cena; ?>zł</p>
-			<?php 
-			echo $nowosc_bestseller;
-			echo $after_widget;
+				$nowosc = $description->nowosc;
+				$bestseller = $description->bestseller;
+				
+				$nowosc_bestseller = "";
+				if($nowosc == 1 || $bestseller == 1) {
+					$nowosc_bestseller .= "<p>";
+					if($nowosc == 1)
+						$nowosc_bestseller .= "<img src=\"http://helion.pl/img/nowosc.gif\" alt=\"Nowość\" /> ";
+					if($bestseller == 1)
+						$nowosc_bestseller .= "<img src=\"http://helion.pl/img/bestseller.gif\" alt=\"Bestseller\" />";
+					$nowosc_bestseller .= "</p>";
+				}
+
+				echo $before_widget;
+				
+				if( $title )
+					echo $before_title . $title . $after_title;
+					
+				?>
+				<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>"><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
+				<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>"><?php echo $k_tytul; ?></a></p>
+				<p>Cena: <?php echo $description->cena; ?>zł</p>
+				<?php 
+				echo $nowosc_bestseller;
+				echo $after_widget;
+				if(defined("HW_DEBUG"))
+					echo "<p>$debug</p>";
+			} else {
+				echo $before_widget;
+				echo $before_title . "Helion Widget Error" . $after_title;
+				echo '<p>Błąd pobierania danych z serwera Helion.</p>';
+				echo '<p>Aby widget mógł działać poprawnie, administrator musi włączyć opcję <code>allow_url_fopen</code> lub zainstalować moduł <code>cURL</code></p>';
+				echo $after_widget;
+			}
 		} else {
 			echo $before_widget;
-			if( $title )
-				echo $before_title . $title . $after_title;
+			echo $before_title . "Helion Widget Error" . $after_title;
 			echo '<p>Nie dodano jeszcze żadnych książek.</p>';
 			echo '<p>Dodaj identyfikatory książek w <code>Ustawienia->Helion Widget</code>.</p>';
 			echo $after_widget;
@@ -295,5 +337,4 @@ function helionwidget_plugin_options() {
 
 }
 
-// http://justintadlock.com/archives/2009/05/26/the-complete-guide-to-creating-widgets-in-wordpress-28
  ?>

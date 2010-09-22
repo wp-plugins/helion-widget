@@ -1,10 +1,10 @@
 === Helion Widget ===
 Contributors: paulpela
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=63SBY4W2R42NW
-Tags: helion, program partnerski,widget
+Tags: helion, program partnerski, widget, zarabianie
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.95
+Stable tag: 0.96
 
 Helion Widget jest przeznaczony dla osób chcących promować na swoim blogu książki z księgarni Helion, Sensus, Onepress i Septem.
 
@@ -19,6 +19,8 @@ Sam(a) wybierasz rozmiar okładki. Dodatkowo, po najechaniu myszką nad okładk�
 Pod okładką wyświetlany jest tytuł oraz cena. Jeśli książka jest bestsellerem lub nowością, informacja o tym pojawia się także pod okładką książki.
 
 Czytelnik po kliknięciu na tytuł lub okładkę zostanie przeniesiony na stronę odpowiedniej księgarni i jeśli w ciągu 30 dni dokona dowolnego zakupu, zostanie ci naliczona procentowa prowizja od sprzedaży.
+
+Strona domowa: http://www.blogworkorange.net/helion-widget/
 
 == Installation ==
 
@@ -48,11 +50,18 @@ Widget jest gotowy do wyświetlania. Przy każdym odświeżeniu strony zostanie 
 
 Należy zarejestrować się na stronie http://program-partnerski.helion.pl/
 
+= Jakie wymagania ma ten widget? =
+
+Helion Widget do poprawnego działania wymaga włączonej na serwerze opcji `allow_url_fopen` oraz modułu PHP SimpleXML (moduł ten jest domyślnie włączony, opcja nie zawsze, ale wtyczka spróbuje ją włączyć) lub, alternatywnie, zainstalowanego modułu cURL (bardzo popularny). Wtyczka sama wykryje, które opcje są dostępne.
+
 == Screenshots ==
 
-screenshot-1.png
+1. Helion Widget w działaniu
 
 == Changelog ==
+
+= 0.96 =
+* Dodano obsługę cURL jako alternatywnej metody pobierania danych z serwera Helion dla osób, które mają wyłączone `allow_url_fopen`
 
 = 0.95 =
 * Informacja o braku listy książek do wyświetlenia
@@ -70,6 +79,9 @@ screenshot-1.png
 * Pierwsza wersja publiczna.
 
 == Upgrade Notice ==
+
+= 0.96 =
+Dodatkowa metoda pobierania danych dla osób, które mają wyłączoną opcję allow_url_fopen.
 
 = 0.95 =
 Dodano informację o braku listy książek do wyświetlenia. W poprzednich wersjach powodowało to powstanie błędu.
