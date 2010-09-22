@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: helion, program partnerski, widget, zarabianie
 Requires at least: 3.0
 Tested up to: 3.0.1
-Stable tag: 0.96
+Stable tag: 0.97
 
 Helion Widget jest przeznaczony dla osób chcących promować na swoim blogu książki z księgarni Helion, Sensus, Onepress i Septem.
 
@@ -60,6 +60,9 @@ Helion Widget do poprawnego działania wymaga włączonej na serwerze opcji `all
 
 == Changelog ==
 
+= 0.97 =
+* Dodano walidację kodów książek (`ident`) oraz obsługę błędów związanych z XML
+
 = 0.96 =
 * Dodano obsługę cURL jako alternatywnej metody pobierania danych z serwera Helion dla osób, które mają wyłączone `allow_url_fopen`
 
@@ -79,6 +82,9 @@ Helion Widget do poprawnego działania wymaga włączonej na serwerze opcji `all
 * Pierwsza wersja publiczna.
 
 == Upgrade Notice ==
+
+= 0.97 =
+Zwiększona ochrona przed występowaniem błędów.
 
 = 0.96 =
 Dodatkowa metoda pobierania danych dla osób, które mają wyłączoną opcję allow_url_fopen.
