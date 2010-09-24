@@ -4,7 +4,7 @@
 	Plugin URI: http://www.blogworkorange.net/helion-widget/
 	Description: Widget promujący wybrane książki z księgarni Helion, zintegrowany z programem partnerskim
 	Author: Paweł Pela
-	Version: 0.97
+	Version: 0.98
 	Author URI: http://www.paulpela.com
 	License: GPL2
 
@@ -174,9 +174,15 @@ class Helion_Widget extends WP_Widget {
 					if( $title )
 						echo $before_title . $title . $after_title;
 						
+						if($uczestnik) {
 					?>
-					<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>"><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
-					<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>"><?php echo $k_tytul; ?></a></p>
+						<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>" rel="nofollow" ><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
+						<p><a href="http://<?php echo $ident[0]; ?>.pl/view/<?php echo $uczestnik; ?>/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>" rel="nofollow" ><?php echo $k_tytul; ?></a></p>
+					
+					<?php } else { ?>
+						<p><a href="http://<?php echo $ident[0]; ?>.pl/ksiazki/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $opis_p; ?>" rel="nofollow" ><img src="http://<?php echo $ident[0]; ?>.pl/okladki/<?php echo $okladka; ?>/<?php echo $ident[1]; ?>.jpg" alt="<?php echo $k_tytul; ?>" /></a></p>
+						<p><a href="http://<?php echo $ident[0]; ?>.pl/ksiazki/<?php echo $ident[1]; ?>.htm" target="_blank" title="<?php echo $k_tytul; ?>" rel="nofollow" ><?php echo $k_tytul; ?></a></p>
+					<?php } ?>
 					<p>Cena: <?php echo $description->cena; ?>zł</p>
 					<?php 
 					echo $nowosc_bestseller;
@@ -192,7 +198,7 @@ class Helion_Widget extends WP_Widget {
 				} else if(!$description) {
 					echo $before_widget;
 					echo $before_title . "Helion Widget Error" . $after_title;
-					echo '<p>Nie znaleziono podanej książki w księgarni Grupy Helion.</p>';
+					echo '<p>Nie znaleziono podanej książki ' . $ident[1] . ' w księgarni Grupy Helion.</p>';
 					echo '<p>Sprawdź, czy podałaś/eś poprawne kody <code>ident</code> w <code>Ustawienia->Helion Widget</code></p>';
 					echo '<p>Możliwe jest również, że serwer Helion chwilowo nie odpowiada.</p>';
 					echo $after_widget;
@@ -207,7 +213,7 @@ class Helion_Widget extends WP_Widget {
 			} else {
 				echo $before_widget;
 					echo $before_title . "Helion Widget Error" . $after_title;
-					echo '<p>Nie znaleziono podanej książki w księgarni Grupy Helion.</p>';
+					echo '<p>Nie znaleziono podanej książki ' . $ident[1] . ' w księgarni Grupy Helion.</p>';
 					echo '<p>Sprawdź, czy podałaś/eś poprawne 5-6-literowe kody <code>ident</code> w <code>Ustawienia->Helion Widget</code></p>';
 					echo $after_widget;
 			}
@@ -244,20 +250,21 @@ class Helion_Widget extends WP_Widget {
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" class="widefat" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'uczestnik' ); ?>">ID uczestnika:</label>
-			<input id="<?php echo $this->get_field_id( 'uczestnik' ); ?>" name="<?php echo $this->get_field_name( 'uczestnik' ); ?>" value="<?php echo $instance['uczestnik']; ?>" class="widefat" />
+			<label for="<?php echo $this->get_field_id( 'uczestnik' ); ?>">ID uczestnika:
+			<input id="<?php echo $this->get_field_id( 'uczestnik' ); ?>" name="<?php echo $this->get_field_name( 'uczestnik' ); ?>" value="<?php echo $instance['uczestnik']; ?>" class="widefat" /></label>
+			<small>Jeśli nie jesteś uczestniczką/kiem Programu Partnerskiego Grupy Helion i nie posiadasz ID uczestnika, możesz zostawić powyższe pole puste.</small>
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'okladka' ); ?>">Rozmiar okładki:</label>
 			<select id="<?php echo $this->get_field_id( 'okladka' ); ?>" name="<?php echo $this->get_field_name( 'okladka' ); ?>" class="widefat" style="width:100%;">
-				<option <?php if($this->get_field_id( 'format' ) == "65x85") echo $selected; ?>>65x85</option>
-				<option <?php if($this->get_field_id( 'format' ) == "72x95") echo $selected; ?>>72x95</option>
-				<option <?php if($this->get_field_id( 'format' ) == "72x95") echo $selected; ?>>72x95</option>
-				<option <?php if($this->get_field_id( 'format' ) == "90x119") echo $selected; ?>>90x119</option>
-				<option <?php if($this->get_field_id( 'format' ) == "120x156") echo $selected; ?>>120x156</option>
-				<option <?php if($this->get_field_id( 'format' ) == "125x163") echo $selected; ?>>125x163</option>
-				<option <?php if($this->get_field_id( 'format' ) == "181x236") echo $selected; ?>>181x236</option>
-				<option <?php if($this->get_field_id( 'format' ) == "326x466") echo $selected; ?>>326x466</option>
+				<option <?php if($instance['okladka'] == "65x85") echo $selected; ?>>65x85</option>
+				<option <?php if($instance['okladka'] == "72x95") echo $selected; ?>>72x95</option>
+				<option <?php if($instance['okladka'] == "72x95") echo $selected; ?>>72x95</option>
+				<option <?php if($instance['okladka'] == "90x119") echo $selected; ?>>90x119</option>
+				<option <?php if($instance['okladka'] == "120x156") echo $selected; ?>>120x156</option>
+				<option <?php if($instance['okladka'] == "125x163") echo $selected; ?>>125x163</option>
+				<option <?php if($instance['okladka'] == "181x236") echo $selected; ?>>181x236</option>
+				<option <?php if($instance['okladka'] == "326x466") echo $selected; ?>>326x466</option>
 			</select>
 		</p>
 
