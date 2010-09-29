@@ -4,7 +4,7 @@
 	Plugin URI: http://www.blogworkorange.net/helion-widget/
 	Description: Widget promujący wybrane książki z księgarni Helion, zintegrowany z programem partnerskim
 	Author: Paweł Pela
-	Version: 0.98
+	Version: 0.99
 	Author URI: http://www.paulpela.com
 	License: GPL2
 
@@ -60,7 +60,7 @@ class Helion_Widget extends WP_Widget {
 	
 	function Helion_Widget() {
 		/* Widget settings. */
-		$widget_ops = array( 'classname' => 'helion', 'description' => 'Widget wyświetlający wybrane książki z księgarni Helion, zintegrowany z programem partnerskim', 'okladka' => '120x156' );
+		$widget_ops = array( 'classname' => 'helion_widget', 'description' => 'Widget wyświetlający wybrane książki z księgarni Helion, zintegrowany z programem partnerskim', 'okladka' => '120x156' );
 
 		/* Widget control settings. */
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'helion-widget' );
